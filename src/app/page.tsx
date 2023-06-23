@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Image
-        src="/splash.png"
+        src="/splash.svg"
         width={325}
         height={288}
         alt="Picture of the author"

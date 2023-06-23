@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import styles from "./Button.module.scss";
+
 type ButtonProps = {
   text: string;
   href: string;
@@ -8,7 +10,7 @@ type ButtonProps = {
 };
 const Button = ({ text, href, style, icon }: ButtonProps) => {
   return (
-    <Link href={href}>
+    <Link className={styles.button} href={href}>
       {icon &&
         <div>
           {icon}

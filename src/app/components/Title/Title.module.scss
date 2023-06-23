@@ -1,0 +1,11 @@
+@import '../../variables.module.scss';
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 31px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: $primary-grey;
+  margin: 40px 0px;
+}
