@@ -1,0 +1,15 @@
+@import "../../variables.module.scss";
+
+.pokemonItem {
+    background-color: white;
+    border-radius: 5px;
+    color: $primary-grey;
+    font-size: 22px;
+    margin: 10px;
+    padding: 10px 20px;
+    max-width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+}
