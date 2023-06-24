@@ -12,6 +12,7 @@ export default function Home() {
         width={325}
         height={288}
         alt="Picture of the author"
+        priority={true}
       />
       <Title text="Welcome to Pokédex" />
       <Text text="The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world." />

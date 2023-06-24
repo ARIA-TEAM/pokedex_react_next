@@ -7,10 +7,11 @@ const Loader = () => {
     <div className={styles.container}>
       <Image
         className={styles.pokeball}
-        src="/loader.png"
+        src="/Loader.svg"
         width={105}
         height={105}
         alt="Loader"
+        priority={true}
       />
       Loading...
     </div>

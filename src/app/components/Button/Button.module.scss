@@ -1,6 +1,7 @@
 @import "../../variables.module.scss";
 
 .button {
+  display: flex;
   color: white;
   background-color: $pokemon-red;
   font-size: 18px;
@@ -8,6 +9,20 @@
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 30px;
+}
+.active {
+  background-color: $lighter-grey;
+  color: white;
+}
+.with_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-left: 5px;
+  img {
+    margin-right: 10px;
+  }
 }
 .icon {
   display: flex;

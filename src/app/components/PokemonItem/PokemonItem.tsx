@@ -3,23 +3,29 @@ import Button from "../Button/Button";
 import styles from "./PokemonItem.module.scss";
 
 type PokemonItemProps = {
-  name: string;
   isFavorite?: boolean;
   onClick?: () => void;
+  toggleFavorite: (pokemon: any) => void;
+  pokemon: any;
 };
 
-const PokemonItem = ({ name }: PokemonItemProps) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+const PokemonItem = ({ toggleFavorite, pokemon }: PokemonItemProps) => {
+  const [isFav, setIsFav] = useState(false);
 
-  const toggleFavorite = () => {
-    console.log("toggleFavorite");
-    setIsFavorite(!isFavorite);
+  const setFavorite = (pokemon: any) => {
+    toggleFavorite(pokemon);
+    setIsFav(!isFav);
   };
 
   return (
-    <li key={name} className={styles.pokemonItem}>
-      <a href={""}>{name}</a>
-      <Button icon={isFavorite ? "/star_selected.svg" : "/star.svg"} onClick={toggleFavorite} />
+    <li className={styles.pokemonItem}>
+      <a href={""}>{pokemon.name}</a>
+      <Button
+        icon={isFav ? "/star_selected.svg" : "/star.svg"}
+        onClick={() => setFavorite(pokemon)}
+        pokemon={pokemon}
+        toggleFavorite={() => setFavorite(pokemon)}
+      />
     </li>
   );
 };
