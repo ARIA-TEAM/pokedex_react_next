@@ -1,4 +1,4 @@
-import { lazy, useRef, useEffect } from "react";
+import { lazy } from "react";
 
 const PokemonItem = lazy(() => import("../PokemonItem/PokemonItem"));
 

@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useState, useEffect, useMemo, useCallback, useRef, lazy } from "react";
-import dynamic from "next/dynamic";
 // styles
 import styles from "./page.module.scss";
 // components
