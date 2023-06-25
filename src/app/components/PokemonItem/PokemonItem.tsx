@@ -9,8 +9,8 @@ type PokemonItemProps = {
   pokemon: any;
 };
 
-const PokemonItem = ({ toggleFavorite, pokemon }: PokemonItemProps) => {
-  const [isFav, setIsFav] = useState(false);
+const PokemonItem = ({ toggleFavorite, pokemon, isFavorite }: PokemonItemProps) => {
+  const [isFav, setIsFav] = useState(isFavorite);
 
   const setFavorite = (pokemon: any) => {
     toggleFavorite(pokemon);

@@ -1,7 +1,15 @@
 "use client";
 
 import axios from "axios";
-import { useState, useEffect, useMemo, useCallback, useRef, lazy } from "react";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+  lazy,
+  use,
+} from "react";
 // styles
 import styles from "./page.module.scss";
 // components
@@ -44,6 +52,7 @@ export default function List() {
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
+    page === "all" && getPokemonList();
   };
 
   const getPokemonList = useCallback(async () => {
