@@ -1,15 +1,21 @@
 @import "../../variables.module.scss";
 
 .pokemonItem {
-    background-color: white;
-    border-radius: 5px;
-    color: $primary-grey;
-    font-size: 22px;
-    margin: 5px 0;
-    padding: 10px 20px;
-    min-width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-transform: capitalize;
+  background-color: white;
+  border-radius: 5px;
+  color: $primary-grey;
+  font-size: 22px;
+  margin: 5px 0;
+  padding: 10px 20px;
+  min-width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+@media screen and (min-width: 768px) {
+  .pokemonItem {
+    min-width: 50%;
+  }
 }

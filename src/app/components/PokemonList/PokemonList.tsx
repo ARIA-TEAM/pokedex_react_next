@@ -1,4 +1,8 @@
-import PokemonItem from "../PokemonItem/PokemonItem";
+import { lazy } from "react";
+
+const PokemonItem = lazy(() => import("../PokemonItem/PokemonItem"));
+
+// import PokemonItem from "../PokemonItem/PokemonItem";
 import Title from "../Title/Title";
 import Text from "../Text/Text";
 

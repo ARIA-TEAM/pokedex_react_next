@@ -1,6 +1,12 @@
 .navigation {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0 auto;
-    padding: 0 2em;
+    max-width: 90%;
+}
+
+@media (min-width: 768px) {
+    .navigation {
+        max-width: 45%;
+    }
 }

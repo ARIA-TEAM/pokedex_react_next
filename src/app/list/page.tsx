@@ -1,13 +1,23 @@
 "use client";
 
 import axios from "axios";
-import { useState, useEffect, useMemo, useCallback, useRef, use } from "react";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+  Suspense,
+  lazy,
+} from "react";
+import dynamic from "next/dynamic";
 // styles
 import styles from "./page.module.scss";
 // components
 import Loader from "../components/Loader/Loader";
-import PokemonList from "../components/PokemonList/PokemonList";
 import Navigation from "../components/Navigation/Navigation";
+// dynamic component
+const PokemonList = lazy(() => import("../components/PokemonList/PokemonList"));
 
 interface Pokemon {
   name: string;
@@ -44,7 +54,9 @@ export default function List() {
   };
 
   const getPokemonList = useCallback(async () => {
-    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=-1");
+    const response = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon?limit=-1"
+    );
     const allPokemon = response.data.results;
 
     allPokemonRef.current = allPokemon;

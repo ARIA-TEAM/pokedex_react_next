@@ -32,7 +32,7 @@ const Button = ({
     icon && !text
       ? `${styles.button} ${styles.icon}`
       : `${styles.button} ${currentPage === tab ? "" : styles.active} ${
-          styles.with_icon
+          icon ? styles.with_icon : ""
         }`;
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
