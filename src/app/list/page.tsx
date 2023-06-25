@@ -1,15 +1,7 @@
 "use client";
 
 import axios from "axios";
-import {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  useRef,
-  Suspense,
-  lazy,
-} from "react";
+import { useState, useEffect, useMemo, useCallback, useRef, lazy } from "react";
 import dynamic from "next/dynamic";
 // styles
 import styles from "./page.module.scss";
@@ -29,6 +21,8 @@ export default function List() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState("all");
   const allPokemonRef = useRef<Pokemon[]>([]);
+  const [nextPageUrl, setNextPageUrl] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   const isFavorite = useMemo(() => {
     return (pokemon: Pokemon) => {
@@ -54,23 +48,54 @@ export default function List() {
   };
 
   const getPokemonList = useCallback(async () => {
-    const response = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=-1"
-    );
+    const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
     const allPokemon = response.data.results;
 
     allPokemonRef.current = allPokemon;
+    setNextPageUrl(response.data.next);
     setPokemonList(allPokemon);
     setIsLoading(false);
   }, []);
+
+  const loadMorePokemons = useCallback(async () => {
+    if (nextPageUrl) {
+      try {
+        const response = await axios.get(nextPageUrl);
+        const data = response.data;
+        setPokemonList([...pokemonList, ...data.results]);
+        setNextPageUrl(data.next);
+      } catch (error) {
+        console.log("Error loading more Pokémon:", error);
+      }
+    }
+  }, [nextPageUrl, pokemonList]);
 
   useEffect(() => {
     getPokemonList();
   }, [getPokemonList]);
 
   useEffect(() => {
-    console.log("currentPage", currentPage);
-  }, [currentPage]);
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+        !isFetching
+      ) {
+        setIsFetching(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isFetching]);
+
+  useEffect(() => {
+    if (!isFetching) return;
+    loadMorePokemons();
+    setIsFetching(false);
+  }, [isFetching, loadMorePokemons]);
 
   return (
     <>

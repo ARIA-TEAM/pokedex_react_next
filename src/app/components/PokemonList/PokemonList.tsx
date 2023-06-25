@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useRef, useEffect } from "react";
 
 const PokemonItem = lazy(() => import("../PokemonItem/PokemonItem"));
 
@@ -29,16 +29,18 @@ const PokemonList = ({
           <Text text="The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world." />
         </>
       ) : (
-        <ul>
-          {pokemons.map((pokemon: Pokemon) => (
-            <PokemonItem
-              key={pokemon.name}
-              toggleFavorite={() => toggleFavorite(pokemon)}
-              isFavorite={isFavorite(pokemon)}
-              pokemon={pokemon}
-            />
-          ))}
-        </ul>
+        <>
+          <ul>
+            {pokemons.map((pokemon: Pokemon, index) => (
+              <PokemonItem
+                key={pokemon.name}
+                toggleFavorite={() => toggleFavorite(pokemon)}
+                isFavorite={isFavorite(pokemon)}
+                pokemon={pokemon}
+              />
+            ))}
+          </ul>
+        </>
       )}
     </>
   );
