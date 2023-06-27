@@ -2,7 +2,6 @@ import { lazy } from "react";
 
 const PokemonItem = lazy(() => import("../PokemonItem/PokemonItem"));
 
-// import PokemonItem from "../PokemonItem/PokemonItem";
 import Title from "../Title/Title";
 import Text from "../Text/Text";
 
@@ -14,12 +13,16 @@ type PokemonListProps = {
   pokemons: Pokemon[];
   toggleFavorite: (pokemon: any) => void;
   isFavorite: (pokemon: any) => boolean;
+  handleShowModal: () => void;
+  handleModalPokemon: (pokemon: any) => void;
 };
 
 const PokemonList = ({
   pokemons,
   toggleFavorite,
   isFavorite,
+  handleShowModal,
+  handleModalPokemon,
 }: PokemonListProps) => {
   return (
     <>
@@ -37,6 +40,8 @@ const PokemonList = ({
                 toggleFavorite={() => toggleFavorite(pokemon)}
                 isFavorite={isFavorite(pokemon)}
                 pokemon={pokemon}
+                handleShowModal={handleShowModal}
+                handleModalPokemon={() => handleModalPokemon(pokemon)}
               />
             ))}
           </ul>

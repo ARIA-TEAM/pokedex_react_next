@@ -16,11 +16,13 @@ import styles from "./page.module.scss";
 import Loader from "../components/Loader/Loader";
 import Navigation from "../components/Navigation/Navigation";
 import SearchBox from "../components/SearchBox/SearchBox";
+import PokemonModal from "../components/PokemonModal/PokemonModal";
 // dynamic component
 const PokemonList = lazy(() => import("../components/PokemonList/PokemonList"));
 
 interface Pokemon {
   name: string;
+  url: string;
 }
 
 export default function List() {
@@ -31,6 +33,9 @@ export default function List() {
   const allPokemonRef = useRef<Pokemon[]>([]);
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [isFetching, setIsFetching] = useState(false);
+  // modal
+  const [showModal, setShowModal] = useState(false);
+  const [modalPokemon, setModalPokemon] = useState<Pokemon | null>(null);
 
   const isFavorite = useMemo(() => {
     return (pokemon: Pokemon) => {
@@ -54,6 +59,14 @@ export default function List() {
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
     page === "all" && getPokemonList();
+  };
+
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleModalPokemon = (pokemon: Pokemon) => {
+    setModalPokemon(pokemon);
   };
 
   const getPokemonList = useCallback(async () => {
@@ -118,6 +131,8 @@ export default function List() {
               pokemons={currentPage === "all" ? pokemonList : favoritePokemons}
               toggleFavorite={toggleFavorite}
               isFavorite={isFavorite}
+              handleShowModal={handleShowModal}
+              handleModalPokemon={handleModalPokemon}
             />
           </div>
           <div className={styles.foating}>
@@ -126,6 +141,14 @@ export default function List() {
               currentPage={currentPage}
             />
           </div>
+          {showModal && modalPokemon && (
+            <PokemonModal
+              handleShowModal={handleShowModal}
+              pokemon={modalPokemon}
+              toggleFavorite={toggleFavorite}
+              isFavorite={() => isFavorite(modalPokemon)}
+            />
+          )}
         </>
       )}
     </>

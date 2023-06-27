@@ -1,0 +1,83 @@
+.pokemonmodal {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background: #00000075;
+  top: 0px;
+  left: 0px;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__body {
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    @media screen and (min-width: 768px) {
+      width: 60vw;
+    }
+  }
+  &__header {
+    background-image: url("../../../../public/pokemon-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+    padding: 20px 0;
+    text-align: center;
+    .close {
+      background-image: url("../../../../public/close_icon.svg");
+      background-color: transparent;
+      background-repeat: no-repeat;
+      height: 26px;
+      width: 26px;
+      border: 0;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+    img {
+      height: 150px;
+    }
+  }
+  &__info {
+    padding: 20px;
+    @media screen and (min-width: 768px) {
+      padding: 30px;
+    }
+    &__item {
+      display: flex;
+      margin: 5px;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+      text-transform: capitalize;
+      strong {
+        margin-right: 5px;
+      }
+    }
+  }
+  &__types {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    li {
+      &:after {
+        content: ", ";
+        margin-right: 5px;
+      }
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+  &__btns {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+}
