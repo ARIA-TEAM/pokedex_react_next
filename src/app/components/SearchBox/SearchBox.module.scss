@@ -1,0 +1,28 @@
+@import "../../variables.module.scss";
+
+.searchbox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 15px 30px;
+  margin-bottom: 20px;
+  background: #fff;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.04);
+  background-image: url("../../../../public/search_icon.svg");
+  background-position: center left 15px;
+  background-repeat: no-repeat;
+  &__input {
+    outline: none;
+    border: none;
+    flex: 1;
+    margin-left: 1rem;
+    font-size: 1.25rem;
+    color: $primary-grey;
+    background: transparent;
+    &::placeholder {
+      color: #ccc;
+    }
+  }
+}

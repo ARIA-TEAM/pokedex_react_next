@@ -15,6 +15,7 @@ import styles from "./page.module.scss";
 // components
 import Loader from "../components/Loader/Loader";
 import Navigation from "../components/Navigation/Navigation";
+import SearchBox from "../components/SearchBox/SearchBox";
 // dynamic component
 const PokemonList = lazy(() => import("../components/PokemonList/PokemonList"));
 
@@ -112,7 +113,7 @@ export default function List() {
       ) : (
         <>
           <div className={styles.main}>
-            <h1>Pokemon Search</h1>
+            <SearchBox />
             <PokemonList
               pokemons={currentPage === "all" ? pokemonList : favoritePokemons}
               toggleFavorite={toggleFavorite}
