@@ -31,6 +31,7 @@ export default function List() {
   const allPokemonRef = useRef<Pokemon[]>([]);
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [isFetching, setIsFetching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const isFavorite = useMemo(() => {
     return (pokemon: Pokemon) => {
@@ -53,58 +54,75 @@ export default function List() {
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
-    page === "all" && getPokemonList();
+    // page === "all" && getPokemonList();
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    // if page is home, filter all pokemons
+    const filteredPokemons = allPokemonRef.current.filter((pokemon) =>
+      pokemon.name.includes(query)
+    );
+    // if page is favorites, filter favorite pokemons
+    const filteredFavorites = favoritePokemons.filter((pokemon) =>
+      pokemon.name.includes(query)
+    );
+    // set filtered pokemons
+    currentPage === "all"
+      ? setPokemonList(filteredPokemons)
+      : setFavoritePokemons(filteredFavorites);
   };
 
   const getPokemonList = useCallback(async () => {
-    const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
+    setIsLoading(true);
+    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=-1");
     const allPokemon = response.data.results;
 
     allPokemonRef.current = allPokemon;
-    setNextPageUrl(response.data.next);
+    // setNextPageUrl(response.data.next);
     setPokemonList(allPokemon);
     setIsLoading(false);
   }, []);
 
-  const loadMorePokemons = useCallback(async () => {
-    if (nextPageUrl) {
-      try {
-        const response = await axios.get(nextPageUrl);
-        const data = response.data;
-        setPokemonList([...pokemonList, ...data.results]);
-        setNextPageUrl(data.next);
-      } catch (error) {
-        console.log("Error loading more Pokémon:", error);
-      }
-    }
-  }, [nextPageUrl, pokemonList]);
+  // const loadMorePokemons = useCallback(async () => {
+  //   if (nextPageUrl) {
+  //     try {
+  //       const response = await axios.get(nextPageUrl);
+  //       const data = response.data;
+  //       setPokemonList([...pokemonList, ...data.results]);
+  //       setNextPageUrl(data.next);
+  //     } catch (error) {
+  //       console.log("Error loading more Pokémon:", error);
+  //     }
+  //   }
+  // }, [nextPageUrl, pokemonList]);
 
   useEffect(() => {
     getPokemonList();
   }, [getPokemonList]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-        !isFetching
-      ) {
-        setIsFetching(true);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+  //       !isFetching
+  //     ) {
+  //       setIsFetching(true);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isFetching]);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [isFetching]);
 
-  useEffect(() => {
-    if (!isFetching) return;
-    loadMorePokemons();
-    setIsFetching(false);
-  }, [isFetching, loadMorePokemons]);
+  // useEffect(() => {
+  //   if (!isFetching) return;
+  //   loadMorePokemons();
+  //   setIsFetching(false);
+  // }, [isFetching, loadMorePokemons]);
 
   return (
     <>
@@ -113,7 +131,7 @@ export default function List() {
       ) : (
         <>
           <div className={styles.main}>
-            <SearchBox />
+            <SearchBox handleSearch={handleSearch} />
             <PokemonList
               pokemons={currentPage === "all" ? pokemonList : favoritePokemons}
               toggleFavorite={toggleFavorite}
