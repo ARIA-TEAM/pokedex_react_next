@@ -1,6 +1,8 @@
-# Pokedex with Next.js
+# Pokedex with Next.js and Support of AI
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+Check the app working [here](https://pokedex-ia.vercel.app).
 
 ## Getting Started
 
