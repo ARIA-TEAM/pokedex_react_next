@@ -7,9 +7,17 @@ type PokemonItemProps = {
   onClick?: () => void;
   toggleFavorite: (pokemon: any) => void;
   pokemon: any;
+  handleShowModal: () => void;
+  handleModalPokemon: (pokemon: any) => void;
 };
 
-const PokemonItem = ({ toggleFavorite, pokemon, isFavorite }: PokemonItemProps) => {
+const PokemonItem = ({
+  toggleFavorite,
+  pokemon,
+  isFavorite,
+  handleShowModal,
+  handleModalPokemon
+}: PokemonItemProps) => {
   const [isFav, setIsFav] = useState(isFavorite);
 
   const setFavorite = (pokemon: any) => {
@@ -17,9 +25,14 @@ const PokemonItem = ({ toggleFavorite, pokemon, isFavorite }: PokemonItemProps) 
     setIsFav(!isFav);
   };
 
+  const handleClick = () => {
+    handleShowModal();
+    handleModalPokemon(pokemon);
+  };
+
   return (
     <li className={styles.pokemonItem}>
-      <a href={""}>{pokemon.name}</a>
+      <div onClick={handleClick}>{pokemon.name}</div>
       <Button
         icon={isFav ? "/star_selected.svg" : "/star.svg"}
         onClick={() => setFavorite(pokemon)}
