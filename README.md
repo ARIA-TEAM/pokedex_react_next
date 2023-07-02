@@ -4,6 +4,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Check the app working [here](https://pokedex-ia.vercel.app).
 
+<img width="984" alt="Screenshot 2023-07-02 at 03 07 50" src="https://github.com/erasmoh/pokedex_react/assets/12125288/b690a587-f3bc-4e5b-964c-264aa5b38853">
+
 ## Getting Started
 
 First, run the development server:
