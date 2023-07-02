@@ -27,6 +27,7 @@ const Button = ({
   handlePageChange,
   tab,
   currentPage,
+  onClick
 }: ButtonProps) => {
   const buttonClasses =
     icon && !text
@@ -42,6 +43,9 @@ const Button = ({
     } else if (handlePageChange && tab) {
       event.preventDefault();
       handlePageChange(tab);
+    } else {
+      event.preventDefault();
+      onClick && onClick();
     }
   };
 
