@@ -1,15 +1,7 @@
 "use client";
 
 import axios from "axios";
-import {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  useRef,
-  lazy,
-  use,
-} from "react";
+import { useState, useEffect, useMemo, useCallback, useRef, lazy } from "react";
 // styles
 import styles from "./page.module.scss";
 // components
@@ -85,7 +77,9 @@ export default function List() {
 
   const getPokemonList = useCallback(async () => {
     setIsLoading(true);
-    const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=-1");
+    const response = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon?limit=-1"
+    );
     const allPokemon = response.data.results;
 
     allPokemonRef.current = allPokemon;

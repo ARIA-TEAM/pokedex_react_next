@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import styles from "./PokemonItem.module.scss";
 
@@ -19,6 +19,10 @@ const PokemonItem = ({
   handleModalPokemon
 }: PokemonItemProps) => {
   const [isFav, setIsFav] = useState(isFavorite);
+
+  useEffect(() => {
+    setIsFav(isFavorite);
+  }, [isFavorite]);
 
   const setFavorite = (pokemon: any) => {
     toggleFavorite(pokemon);
