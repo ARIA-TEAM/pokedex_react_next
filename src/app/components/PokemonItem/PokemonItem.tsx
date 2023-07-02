@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, RefObject } from "react";
+import { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./PokemonItem.module.scss";
 

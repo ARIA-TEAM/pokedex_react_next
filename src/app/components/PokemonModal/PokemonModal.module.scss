@@ -14,7 +14,7 @@
     border-radius: 5px;
     overflow: hidden;
     @media screen and (min-width: 768px) {
-      width: 60vw;
+      width: 30vw;
     }
   }
   &__header {
@@ -35,6 +35,7 @@
       position: absolute;
       top: 15px;
       right: 15px;
+      cursor: pointer;
     }
     img {
       height: 150px;

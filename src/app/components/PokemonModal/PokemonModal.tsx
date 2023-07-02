@@ -26,8 +26,8 @@ const PokemonModal = ({
 }: PokemonListProps) => {
   const [pokemonInfo, setPokemonInfo] = useState<any | null>(null);
   const [isFav, setIsFav] = useState(() => isFavorite(pokemon));
-  if (!pokemon) return null;
   const getPokemon = async () => {
+    if (!pokemon) return null;
     const response = await fetch(pokemon.url);
     const data = await response.json();
     setPokemonInfo(data);
