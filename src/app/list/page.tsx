@@ -31,8 +31,6 @@ export default function List() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState("all");
   const allPokemonRef = useRef<Pokemon[]>([]);
-  const [nextPageUrl, setNextPageUrl] = useState("");
-  const [isFetching, setIsFetching] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   // modal
   const [showModal, setShowModal] = useState(false);
@@ -59,7 +57,6 @@ export default function List() {
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
-    // page === "all" && getPokemonList();
   };
 
   const handleSearch = (query: string) => {
@@ -92,50 +89,13 @@ export default function List() {
     const allPokemon = response.data.results;
 
     allPokemonRef.current = allPokemon;
-    // setNextPageUrl(response.data.next);
     setPokemonList(allPokemon);
     setIsLoading(false);
   }, []);
 
-  // const loadMorePokemons = useCallback(async () => {
-  //   if (nextPageUrl) {
-  //     try {
-  //       const response = await axios.get(nextPageUrl);
-  //       const data = response.data;
-  //       setPokemonList([...pokemonList, ...data.results]);
-  //       setNextPageUrl(data.next);
-  //     } catch (error) {
-  //       console.log("Error loading more Pokémon:", error);
-  //     }
-  //   }
-  // }, [nextPageUrl, pokemonList]);
-
   useEffect(() => {
     getPokemonList();
   }, [getPokemonList]);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-  //       !isFetching
-  //     ) {
-  //       setIsFetching(true);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [isFetching]);
-
-  // useEffect(() => {
-  //   if (!isFetching) return;
-  //   loadMorePokemons();
-  //   setIsFetching(false);
-  // }, [isFetching, loadMorePokemons]);
 
   return (
     <>
