@@ -115,6 +115,9 @@ const PokemonModal = ({
                 src={
                   pokemonInfo &&
                   pokemonInfo.sprites.other.dream_world.front_default
+                    ? pokemonInfo.sprites.other.dream_world.front_default
+                    : pokemonInfo.sprites.other["official-artwork"]
+                        .front_default
                 }
                 width="200"
                 height="200"
