@@ -16,6 +16,7 @@ type ButtonProps = {
   handlePageChange?: any;
   tab?: any;
   currentPage?: string;
+  type?: string;
 };
 const Button = ({
   text,
@@ -27,7 +28,8 @@ const Button = ({
   handlePageChange,
   tab,
   currentPage,
-  onClick
+  onClick,
+  type = "button",
 }: ButtonProps) => {
   const buttonClasses =
     icon && !text
@@ -37,20 +39,18 @@ const Button = ({
         }`;
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    type !== "button" && event.preventDefault();
     if (toggleFavorite && pokemon) {
-      event.preventDefault();
       toggleFavorite(pokemon);
     } else if (handlePageChange && tab) {
-      event.preventDefault();
       handlePageChange(tab);
     } else {
-      event.preventDefault();
       onClick && onClick();
     }
   };
 
   return (
-    <Link className={buttonClasses} href={href} onClick={handleClick}>
+    <Link className={buttonClasses} type={type} href={href} onClick={handleClick}>
       {icon && text && (
         <Image src={icon} alt="Button icon" width={20} height={20} />
       )}
