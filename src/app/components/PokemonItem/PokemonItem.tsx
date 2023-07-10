@@ -41,6 +41,7 @@ const PokemonItem = ({
         icon={isFav ? "/star_selected.svg" : "/star.svg"}
         onClick={() => setFavorite(pokemon)}
         pokemon={pokemon}
+        // type="button"
         toggleFavorite={() => setFavorite(pokemon)}
       />
     </li>

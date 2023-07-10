@@ -41,6 +41,7 @@ const Button = ({
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     type !== "button" && event.preventDefault();
     if (toggleFavorite && pokemon) {
+      event.preventDefault();
       toggleFavorite(pokemon);
     } else if (handlePageChange && tab) {
       handlePageChange(tab);
