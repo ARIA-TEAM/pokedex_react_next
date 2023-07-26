@@ -75,16 +75,16 @@ export default function List() {
     setModalPokemon(pokemon);
   };
 
-  const getPokemonList = useCallback(async () => {
-    setIsLoading(true);
-    const response = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=-1"
-    );
-    const allPokemon = response.data.results;
+  const getPokemonList = useMemo(() => {
+    return async () => {
+      setIsLoading(true);
+      const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=-1");
+      const allPokemon = response.data.results;
 
-    allPokemonRef.current = allPokemon;
-    setPokemonList(allPokemon);
-    setIsLoading(false);
+      allPokemonRef.current = allPokemon;
+      setPokemonList(allPokemon);
+      setIsLoading(false);
+    };
   }, []);
 
   useEffect(() => {
@@ -105,6 +105,7 @@ export default function List() {
               isFavorite={isFavorite}
               handleShowModal={handleShowModal}
               handleModalPokemon={handleModalPokemon}
+              handlePageChange={handlePageChange}
             />
           </div>
           <div className={styles.foating}>

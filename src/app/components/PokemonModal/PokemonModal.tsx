@@ -68,16 +68,9 @@ const PokemonModal = ({
     const height = `${pokemonInfo.height / 10}m`;
     const types = formatTypes(pokemonInfo.types);
 
-    const textToCopy = `*Name*: ${name}\nWeight: ${weight}\nHeight: ${height}\nTypes: ${types}`;
+    const textToCopy = `Name: ${name}\nWeight: ${weight}\nHeight: ${height}\nTypes: ${types}`;
 
-    navigator.clipboard
-      .writeText(textToCopy)
-      .then(() => {
-        console.log("Copied to clipboard");
-      })
-      .catch((error) => {
-        console.error("Failed to copy to clipboard", error);
-      });
+    navigator.clipboard.writeText(textToCopy);
   };
 
   const closeModal = () => {

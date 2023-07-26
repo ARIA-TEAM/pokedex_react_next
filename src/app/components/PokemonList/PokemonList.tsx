@@ -4,6 +4,7 @@ const PokemonItem = lazy(() => import("../PokemonItem/PokemonItem"));
 
 import Title from "../Title/Title";
 import Text from "../Text/Text";
+import Button from "../Button/Button";
 
 interface Pokemon {
   name: string;
@@ -15,6 +16,7 @@ type PokemonListProps = {
   isFavorite: (pokemon: any) => boolean;
   handleShowModal: () => void;
   handleModalPokemon: (pokemon: any) => void;
+  handlePageChange: (page: any) => void;
 };
 
 const PokemonList = ({
@@ -23,13 +25,19 @@ const PokemonList = ({
   isFavorite,
   handleShowModal,
   handleModalPokemon,
+  handlePageChange
 }: PokemonListProps) => {
   return (
     <>
       {pokemons.length === 0 ? (
         <>
-          <Title text="No pokemons" />
-          <Text text="The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers in the Pokémon world." />
+          <Title text="Uh-oh!" />
+          <Text text="You look lost on your journey." />
+          <Button
+            tab="all"
+            handlePageChange={() => handlePageChange("all")}
+            text="Back to home"
+          />
         </>
       ) : (
         <>
